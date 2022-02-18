@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.2](https://github.com/mostafa8026/diffal/compare/v0.0.1...v0.0.2) (2022-02-18)
+
+
+### Features
+
+* **devops:** add standard-version ([89bda39](https://github.com/mostafa8026/diffal/commit/89bda3988f74a4a0f5d197dea91fc03932689bf9))
+
 ### 0.0.1 (2022-02-18)
 
 
