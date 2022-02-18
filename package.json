@@ -4,12 +4,12 @@
   "description": "",
   "author": "",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "node main.js",
+    "start": "node dist/main",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
@@ -88,5 +88,16 @@
       "skipScope": false,
       "defaultType": "fix"
     }
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mostafa8026/diffal.git"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "nest",
+    "divar",
+    "sheypoor"
+  ]
 }
