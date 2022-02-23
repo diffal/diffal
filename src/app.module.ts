@@ -30,7 +30,9 @@ import { TestBedModule } from './test-bed/test-bed.module';
             database: dbConfigService.database,
             synchronize: true,
             autoLoadEntities: true,
-            extra: JSON.parse(dbConfigService.extra),
+            ...(dbConfigService.extra && {
+              extra: JSON.parse(dbConfigService.extra),
+            }),
           };
         }
       },
