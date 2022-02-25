@@ -6,6 +6,9 @@ import { AppService } from './app.service';
 import { dbConfig } from './config/db.config';
 import { UserModule } from './user/user.module';
 import { TestBedModule } from './test-bed/test-bed.module';
+import { LoggerModule } from './logger/logger.module';
+import { APP_FILTER } from '@nestjs/core';
+import { LogExceptionFilter } from './common/filter/log-exception.filter';
 
 @Module({
   imports: [
@@ -31,8 +34,15 @@ import { TestBedModule } from './test-bed/test-bed.module';
       },
     }),
     TestBedModule,
+    LoggerModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_FILTER,
+      useClass: LogExceptionFilter,
+    },
+  ],
 })
 export class AppModule {}
