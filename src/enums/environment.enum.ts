@@ -5,4 +5,6 @@ export enum Environment {
   DB_USER_NAME = 'DB_USER_NAME',
   DB_PASSWORD = 'DB_PASSWORD',
   DB_DATABASE = 'DB_DATABASE',
+  DB_EXTRA = 'DB_EXTRA',
+  DATABASE_URL = 'DATABASE_URL',
 }
