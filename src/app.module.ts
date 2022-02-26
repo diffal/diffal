@@ -18,19 +18,26 @@ import { LogExceptionFilter } from './common/filter/log-exception.filter';
       imports: [ConfigModule.forFeature(dbConfig)],
       inject: [dbConfig.KEY],
       useFactory: (dbConfigService: ConfigType<typeof dbConfig>) => {
-        return {
-          type: 'mssql',
-          host: dbConfigService.host,
-          port: dbConfigService.port,
-          username: dbConfigService.userName,
-          password: dbConfigService.password,
-          database: dbConfigService.database,
-          synchronize: true,
-          autoLoadEntities: true,
-          extra: {
-            trustServerCertificate: true,
-          },
-        };
+        if (dbConfigService.databaseUrl) {
+          return {
+            type: dbConfigService.type as any,
+            url: dbConfigService.databaseUrl,
+          };
+        } else {
+          return {
+            type: dbConfigService.type as any,
+            host: dbConfigService.host,
+            port: dbConfigService.port,
+            username: dbConfigService.userName,
+            password: dbConfigService.password,
+            database: dbConfigService.database,
+            synchronize: true,
+            autoLoadEntities: true,
+            ...(dbConfigService.extra && {
+              extra: JSON.parse(dbConfigService.extra),
+            }),
+          };
+        }
       },
     }),
     TestBedModule,
