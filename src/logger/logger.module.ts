@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ExceptionLogEntity } from './entities/exception-log.entity';
+import { ExceptionLogRepository } from './entities/exception-log.repository';
 import { ExceptionLogService } from './exception-log/exception-log.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ExceptionLogEntity])],
+  imports: [TypeOrmModule.forFeature([ExceptionLogRepository])],
   providers: [ExceptionLogService],
   exports: [ExceptionLogService],
 })
-export class LoggerModule {}
+export class LoggerModule { }
