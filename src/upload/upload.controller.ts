@@ -10,14 +10,14 @@ import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 @Controller('upload')
 export class UploadController {
   @Post('single')
-  @UseInterceptors(FileInterceptor('file', { dest: './uploads' }))
-  uploadSingle(@UploadedFile() file) {
-    console.log(file);
-  }
-
-  @Post('Multiple')
-  @UseInterceptors(FilesInterceptor('files[]', 10, { dest: './uploads' }))
-  uploadMultiple(@UploadedFiles() files) {
-    console.log(files);
+  @UseInterceptors(FileInterceptor('file'))
+  uploadSingle(@UploadedFile() file: Express.Multer.File) {
+    const response = {
+      originalname: file.originalname,
+      filename: file.filename,
+      path: file.path,
+      mimetype: file.mimetype,
+    };
+    return response;
   }
 }
