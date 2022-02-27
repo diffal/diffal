@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { dbConfig } from './config/db.config';
 import { UserModule } from './user/user.module';
 import { TestBedModule } from './test-bed/test-bed.module';
+import { UploadModule } from './upload/upload.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { TestBedModule } from './test-bed/test-bed.module';
       },
     }),
     TestBedModule,
+    UploadModule,
   ],
   controllers: [AppController],
   providers: [AppService],
