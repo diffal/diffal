@@ -5,10 +5,10 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { ExceptionLogService } from 'src/logger/exception-log/exception-log.service';
+import { ExceptionLogService } from 'src/logger/exception-log.service';
 @Catch(HttpException)
 export class LogExceptionFilter implements ExceptionFilter {
-  constructor(private exceptionLogService: ExceptionLogService) {}
+  constructor(private exceptionLogService: ExceptionLogService) { }
   async catch(exception: HttpException, host: ArgumentsHost) {
     const context = host.switchToHttp();
     const response = context.getResponse<Response>();
