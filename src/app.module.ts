@@ -6,6 +6,12 @@ import { AppService } from './app.service';
 import { dbConfig } from './config/db.config';
 import { UserModule } from './user/user.module';
 import { TestBedModule } from './test-bed/test-bed.module';
+import { Management1Module } from './management1/management1.module';
+import { Management2Module } from './management2/management2.module';
+import { Management3Module } from './management3/management3.module';
+import { Management4Module } from './management4/management4.module';
+import { Management5Module } from './management5/management5.module';
+import { Management6Module } from './management6/management6.module';
 
 @Module({
   imports: [
@@ -38,6 +44,12 @@ import { TestBedModule } from './test-bed/test-bed.module';
       },
     }),
     TestBedModule,
+    Management1Module,
+    Management2Module,
+    Management3Module,
+    Management4Module,
+    Management5Module,
+    Management6Module,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -7,13 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="them/header.css">
 
-    <title>Document</title>
+    <title>{{title}}</title>
 </head>
 
 <body>
-    <div class="myheader">
-        <img src="/image/favicon.jpg" width="30%" height="200px">
+    {{>header}}
+    <div class="bottomheader">
+        <div>
+            {{>navi}}
+        </div>
+        <div>
+            <h1>مدیریت 1</h1>
+        </div>
     </div>
+    {{>footer}}
+
 </body>
 
 </html>
