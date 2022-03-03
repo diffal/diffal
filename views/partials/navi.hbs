@@ -12,22 +12,23 @@
 
 <body>
     <ul class="navbar">
-        <li>
+
+        <li {{#if active.management1}} class="activecolor" {{/if}}>
             <a href="management1">مدیریت 1</a>
         </li>
-        <li>
+        <li {{#if active.management2}} class="activecolor" {{/if}}>
             <a href="management2">مدیریت 2</a>
         </li>
-        <li>
+        <li {{#if active.management3}} class="activecolor" {{/if}}>
             <a href="management3">مدیریت 3</a>
         </li>
-        <li>
+        <li {{#if active.management4}}class="activecolor" {{/if}}>
             <a href="management4">مدیریت 4</a>
         </li>
-        <li>
+        <li {{#if active.management5}}class="activecolor" {{/if}}>
             <a href="management5">مدیریت 5</a>
         </li>
-        <li>
+        <li {{#if active.management6}}class="activecolor" {{/if}}>
             <a href="management6">مدیریت 6</a>
         </li>
     </ul>

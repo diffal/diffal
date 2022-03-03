@@ -25,10 +25,12 @@
 
 .navbar{
   margin:0;
+  padding:0;
   
 }
+.activecolor{ background-color: #26ff26 !important; } 
 
-  .navbar li {
+.navbar li {
     height: 45px;
     width: 150px;
     text-align: center;
@@ -55,8 +57,7 @@
   /* .navbar li:hover {
     background-color: #a1a3a1;
   } */
-.navbar  li:hover{ background-color: #a1a3a1;}
+.navbar  li:hover{ background-color: #26ff26;}
 .navbar  li:hover a{ color: rgb(255, 255, 255); }
-.navbar  li:active{ background-color: #a1a3a1; }
-.navbar  li:focus{ background-color: #a1a3a1; }
-.navbar  li:active a{ color: rgb(255, 255, 255); }
+/* .navbar  li:active{ background-color: #26ff26; } */
+/* .navbar  li:active a{ color: rgb(255, 255, 255); } */
