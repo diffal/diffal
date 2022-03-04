@@ -1,13 +1,17 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigType } from '@nestjs/config';
 import { MulterModule } from '@nestjs/platform-express';
-import { Environment } from 'src/enums/environment.enum';
+import { uldConfig } from 'src/config/uld.config';
 import { UploadController } from './upload.controller';
 
 @Module({
   imports: [
-    MulterModule.register({
-      // dest: process.env[Environment.UPLOAD_ADDRESS],
-      dest: 'files/upload',
+    MulterModule.registerAsync({
+      imports: [ConfigModule.forFeature(uldConfig)],
+      inject: [uldConfig.KEY],
+      useFactory: (uldConfigService: ConfigType<typeof uldConfig>) => ({
+        dest: uldConfigService.dest,
+      }),
     }),
   ],
   controllers: [UploadController],
