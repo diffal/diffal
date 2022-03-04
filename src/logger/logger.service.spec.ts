@@ -4,12 +4,12 @@ import { LoggerService } from './logger.service';
 describe('LoggerService', () => {
   let service: LoggerService;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [LoggerService],
     }).compile();
 
-    service = module.get<LoggerService>(LoggerService);
+    service = await module.resolve<LoggerService>(LoggerService);
   });
 
   it('should be defined', () => {

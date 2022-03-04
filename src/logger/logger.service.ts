@@ -1,30 +1,18 @@
-import { Injectable, Scope } from '@nestjs/common';
+import { ConsoleLogger, Injectable, Scope } from '@nestjs/common';
 
 @Injectable({
   scope: Scope.TRANSIENT, //new class for each called,un singleton
 })
-export class LoggerService implements LoggerService {
+export class LoggerService extends ConsoleLogger {
   log(message: any, ...optionalParams: any[]) {
-    console.log(message, optionalParams);
+    this.log(message, optionalParams);
   }
 
-  /**
-   * Write an 'error' level log.
-   */
-  error(message: any, ...optionalParams: any[]) {}
+  error(message: any, ...optionalParams: any[]) {
+    this.error(message, optionalParams);
+  }
 
-  /**
-   * Write a 'warn' level log.
-   */
-  warn(message: any, ...optionalParams: any[]) {}
-
-  /**
-   * Write a 'debug' level log.
-   */
-  debug?(message: any, ...optionalParams: any[]) {}
-
-  /**
-   * Write a 'verbose' level log.
-   */
-  verbose?(message: any, ...optionalParams: any[]) {}
+  warn(message: any, ...optionalParams: any[]) {
+    this.warn(message, optionalParams);
+  }
 }
