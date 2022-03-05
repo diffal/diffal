@@ -32,6 +32,6 @@ describe('EceptionLogService', () => {
         error: 'test error',
       },
     });
-    expect(finderr).not.toBeNull();
+    expect(finderr).toBeDefined();
   });
 });
