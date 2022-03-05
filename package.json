@@ -1,7 +1,7 @@
 {
   "name": "diffal",
   "version": "0.0.2",
-  "description": "",
+  "description": "[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)",
   "author": "",
   "private": true,
   "license": "MIT",
@@ -102,7 +102,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mostafa8026/diffal.git"
+    "url": "git+https://github.com/mostafa8026/diffal.git"
   },
   "keywords": [
     "node",
@@ -110,5 +110,13 @@
     "nest",
     "divar",
     "sheypoor"
-  ]
+  ],
+  "bugs": {
+    "url": "https://github.com/mostafa8026/diffal/issues"
+  },
+  "homepage": "https://github.com/mostafa8026/diffal#readme",
+  "main": ".eslintrc.js",
+  "directories": {
+    "test": "test"
+  }
 }
