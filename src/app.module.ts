@@ -6,7 +6,6 @@ import { AppService } from './app.service';
 import { dbConfig } from './config/db.config';
 import { UserModule } from './user/user.module';
 import { TestBedModule } from './test-bed/test-bed.module';
-import { TestcontrollerController } from './testcontroller/testcontroller.controller';
 import { LogRequestModule } from './log-request/log-request.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { LogRequestInterceptor } from './common/interceptors/log-request.interceptor';
@@ -44,7 +43,7 @@ import { LogRequestInterceptor } from './common/interceptors/log-request.interce
     TestBedModule,
     LogRequestModule,
   ],
-  controllers: [AppController, TestcontrollerController],
+  controllers: [AppController],
   providers: [
     AppService,
     {
@@ -53,4 +52,4 @@ import { LogRequestInterceptor } from './common/interceptors/log-request.interce
     },
   ],
 })
-export class AppModule {}
+export class AppModule { }

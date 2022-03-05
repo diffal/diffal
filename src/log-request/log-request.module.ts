@@ -8,4 +8,4 @@ import { LogRequestRepository } from './entities/log-request.repository';
   providers: [LogRequestService],
   exports: [LogRequestService],
 })
-export class LogRequestModule { }
+export class LogRequestModule {}
