@@ -10,11 +10,15 @@ describe('AppController', () => {
       controllers: [AppController],
       providers: [AppService],
     }).compile();
-
+                      
     appController = app.get<AppController>(AppController);
   });
 
   describe('root', () => {
+    it('should return "Here, we create diffal :)"', () => {
+      expect(appController.getHello()).toBe('Here, we create diffal :)');
+    });
+
     it('should return "Here, we create diffal :)"', () => {
       expect(appController.getHello()).toBe('Here, we create diffal :)');
     });
