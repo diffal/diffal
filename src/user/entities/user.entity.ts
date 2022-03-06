@@ -9,5 +9,7 @@ export class UserEntity {
   @Column()
   username: string;
   @Column()
-  password: number;
+  password: string;
+  // @Column()
+  // createdAt: Date = new Date();
 }

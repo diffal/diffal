@@ -1,87 +1,141 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { TestBedModule } from '../test-bed/test-bed.module';
-import { UserRepository } from './entities/user.repository';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { UserEntity } from './entities/user.entity';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
-
 describe('UserController', () => {
   let controller: UserController;
-  let userRepository: UserRepository;
+  let service: FakeUserService;
 
+  class FakeUserService { 
+    findAll() : any {};
+    findOne(id:string) : any {};
+    remove(id:string) : any {};
+    create(createUserDto:CreateUserDto): any{};
+    update(id:string,updateUserDto:UpdateUserDto): any{}
+ }
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [
-        TestBedModule.forRoot(),
-        TypeOrmModule.forFeature([UserRepository]),
-      ],
+      imports: [],
       controllers: [UserController],
       providers: [UserService],
-    }).compile();
+    })
+    .overrideProvider(UserService)
+    .useClass(FakeUserService)
+    .compile();
 
     controller = module.get<UserController>(UserController);
-    userRepository = module.get<UserRepository>(UserRepository);
+    service = module.get<FakeUserService>(UserService);
   });
 
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
 
-  it('should be return all user', async () => {
-    const Users = userRepository.create([
+  it('should be return all users', async () => {
+    // Arrange
+    const users = [];
+    const findAllSpy = jest.spyOn(service, 'findAll').mockResolvedValue(users);
+
+    // Act
+    const expectedValue = await controller.findAll();
+
+    // Assert
+    expect(service.findAll).toBeCalled();
+    expect(expectedValue).toEqual(users);
+
+    findAllSpy.mockReset();
+  });
+
+  it('should be return one user', async () => {
+    // Arrange
+    const users = [
       {
-        name: 'mo',
-        username: '1223',
-        password: 1213,
+        id:'1',
+        name: 'mostafa',
+        username: '123',
+        password: '123',
       },
       {
-        name: 'mostafa',
+        id:'2',
+        name: 'ali',
         username: '123',
-        password: 123,
-      }]);
-    await userRepository.save(Users);
-    const findall = await controller.findAll()
-    // console.log(findall)
-    expect(findall).toEqual(Users);
-  })
+        password: '123',
+      },
+    ];
+    const findAllSpy = jest.spyOn(service, 'findOne').mockResolvedValue(users[0]);
 
-  it('should be creat user , and work findOne method', async () => {
-    const user = await controller.create({ name: "ali", username: "a", password: 123 })
-    await userRepository.save(user);
-    const find = await controller.findOne(user.id)
-    expect(user).toEqual(find);
-  })
+    // Act
+    const expectedValue = await controller.findOne('1');
 
-  it('should be delete user , and work findOne method', async () => {
-    const users = userRepository.create(
+    // Assert
+    expect(service.findOne).toBeCalled();
+    expect(expectedValue).toEqual(users[0]);
+    findAllSpy.mockReset();
+  });
+
+  it('should be delete user', async () => {
+    // Arrange
+    const users = [];
+    const findAllSpy = jest.spyOn(service, 'remove').mockResolvedValue(null);
+
+    // Act
+    const expectedValue = await controller.remove('1');
+
+    // Assert
+    expect(service.remove).toBeCalled();
+    expect(expectedValue).toEqual(null);
+    findAllSpy.mockReset();
+  });
+
+  it('should be create user', async () => {
+    // Arrange
+    const testUser = {
+      name: 'milad',
+      username: '1234',
+      password: '1123',
+    };
+    const findAllSpy = jest.spyOn(service, 'create').mockResolvedValue(testUser);
+
+    // Act
+    const expectedValue = await controller.create(testUser);
+
+    // Assert
+    expect(service.create).toBeCalled();
+    expect(expectedValue).toEqual(testUser);
+    findAllSpy.mockReset();
+  });
+
+  it('should be update user', async () => {
+    // Arrange
+    const users = [
       {
+        id:'1',
         name: 'mostafa',
         username: '123',
-        password: 123,
-      });
-    await userRepository.save(users);
-    await controller.findOne(users.id)
-    // console.log(user)
-    await controller.remove(users.id)
-    const find = await controller.findOne(users.id)
-    expect(find).toBeUndefined();
-  })
-
-  it('should be update user , and work findOne method', async () => {
-    const user = userRepository.create(
+        password: '123',
+      },
       {
-        name: 'mostafa',
+        id:'2',
+        name: 'ali',
         username: '123',
-        password: 123,
-      });
-    await userRepository.save(user);
-    await controller.findOne(user.id)
-    // console.log(user)
-    const updateuser = { name: 'milad', username: '1234', password: 1123 }
-    const updateUser = await controller.update(user.id, updateuser)
-    expect(updateUser).toEqual({ id: user.id, ...updateuser });
-  })
+        password: '123',
+      },
+    ];
+    const updateUser = {
+      name: 'milad',
+      username: '1234',
+      password: '1123',
+    };
+    const findAllSpy = jest.spyOn(service, 'update').mockResolvedValue(updateUser);
+
+    // Act
+    const expectedValue = await controller.update('1',updateUser);
+
+    // Assert
+    expect(service.update).toBeCalled();
+    expect(expectedValue).toEqual(updateUser);
+    findAllSpy.mockReset();
+  });
 });
-
-
-
