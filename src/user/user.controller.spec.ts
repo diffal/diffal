@@ -3,29 +3,19 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
+jest.mock('./user.service.ts');
 describe('UserController', () => {
   let controller: UserController;
-  let service: FakeUserService;
+  let service: UserService;
 
-  class FakeUserService {
-    findAll(): any {}
-    findOne(id: string): any {}
-    remove(id: string): any {}
-    create(createUserDto: CreateUserDto): any {}
-    update(id: string, updateUserDto: UpdateUserDto): any {}
-  }
-  beforeAll(async () => {
+  beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [],
       controllers: [UserController],
       providers: [UserService],
-    })
-      .overrideProvider(UserService)
-      .useClass(FakeUserService)
-      .compile();
+    }).compile();
 
     controller = module.get<UserController>(UserController);
-    service = module.get<FakeUserService>(UserService);
+    service = module.get<UserService>(UserService);
   });
 
   it('should be defined', () => {
@@ -92,21 +82,25 @@ describe('UserController', () => {
 
   it('should be create user', async () => {
     // Arrange
-    const testUser = {
+    const testUser: CreateUserDto = {
       name: 'milad',
       username: '1234',
       password: '1123',
     };
+    const expectedReturn = {
+      id: '1',
+      ...testUser,
+    };
     const findAllSpy = jest
       .spyOn(service, 'create')
-      .mockResolvedValue(testUser);
+      .mockResolvedValue(expectedReturn);
 
     // Act
     const expectedValue = await controller.create(testUser);
 
     // Assert
     expect(service.create).toBeCalled();
-    expect(expectedValue).toEqual(testUser);
+    expect(expectedValue).toEqual(expectedReturn);
     findAllSpy.mockReset();
   });
 
@@ -119,28 +113,26 @@ describe('UserController', () => {
         username: '123',
         password: '123',
       },
-      {
-        id: '2',
-        name: 'ali',
-        username: '123',
-        password: '123',
-      },
     ];
     const updateUser = {
       name: 'milad',
       username: '1234',
       password: '1123',
     };
+    const expectedReturn = {
+      id: '1',
+      ...updateUser,
+    };
     const findAllSpy = jest
       .spyOn(service, 'update')
-      .mockResolvedValue(updateUser);
+      .mockResolvedValue(expectedReturn);
 
     // Act
     const expectedValue = await controller.update('1', updateUser);
 
     // Assert
     expect(service.update).toBeCalled();
-    expect(expectedValue).toEqual(updateUser);
+    expect(expectedValue).toEqual(expectedReturn);
     findAllSpy.mockReset();
   });
 });
