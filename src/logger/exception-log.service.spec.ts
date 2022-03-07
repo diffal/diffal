@@ -7,7 +7,7 @@ import { ExceptionLogService } from './exception-log.service';
 
 describe('EceptionLogService', () => {
   let service: ExceptionLogService;
-  let exceptionLogRepository: ExceptionLogRepository
+  let exceptionLogRepository: ExceptionLogRepository;
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
@@ -18,7 +18,9 @@ describe('EceptionLogService', () => {
     }).compile();
 
     service = module.get<ExceptionLogService>(ExceptionLogService);
-    exceptionLogRepository = module.get<ExceptionLogRepository>(ExceptionLogRepository);
+    exceptionLogRepository = module.get<ExceptionLogRepository>(
+      ExceptionLogRepository,
+    );
   });
 
   it('should be defined', () => {

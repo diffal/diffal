@@ -16,6 +16,6 @@ export class CategoryEntity {
   name: string;
   @TreeChildren({ cascade: true })
   childrens: CategoryEntity[];
-  @TreeParent()
+  @TreeParent({ onDelete: 'CASCADE' })
   parent: CategoryEntity;
 }

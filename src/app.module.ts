@@ -11,7 +11,6 @@ import { APP_FILTER } from '@nestjs/core';
 import { LogExceptionFilter } from './common/filter/log-exception.filter';
 import { LoggerModule } from './logger/logger.module';
 
-
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -47,7 +46,6 @@ import { LoggerModule } from './logger/logger.module';
     CategoriesModule,
 
     LoggerModule,
-
   ],
   controllers: [AppController],
   providers: [

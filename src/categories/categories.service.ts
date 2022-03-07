@@ -1,6 +1,6 @@
-import { HttpStatus, Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { ChildEntity, Repository, TreeChildren } from 'typeorm';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { PaginatedDto } from './dto/pageinated_category';
 import { UpdateCategoryDto } from './dto/update-category.dto';
@@ -56,17 +56,42 @@ export class CategoriesService {
       }),
     );
   }
-  
-  
 
-  async remove(id: number) {
-    const delete_category = await this.findOne(id);
-    if (id != undefined) {
-      this.categoryRepository.remove(delete_category);
-    } else {
-      console.log('ID not found');
-      return HttpStatus.NOT_FOUND;
+  async remove(id: string) {
+    const delete_category = await this.categoryRepository.findOne(id);
+    if (!id) {
+      throw new NotFoundException('not found category');
     }
-    return delete_category;
+    return this.categoryRepository.remove(delete_category);
   }
+  
+    async remove_child(id: string, id_child: CategoryEntity) {
+      const findParent = await this.categoryRepository.findOne(id);
+      const findChild = await this.categoryRepository.findOne({
+       where:{
+         id:id_child.childrens
+       } 
+      })
+  
+      if (findChild != undefined || findParent == findChild) {
+        this.categoryRepository.remove(findParent)
+        return this.categoryRepository.remove(findChild)
+      }
+    }
+    
+
+  //Net solution*
+  /*
+  async delete_child(id: string) {
+
+    const ParentTree = await this.categoryRepository.getTreeRepository(CategoryEntity);
+    const nodeToBeDeleted = await this.categoryRepository.getTreeRepository(CategoryEntity).findOne(id);
+    await this.categoryRepository.query("SET foreign_key_checks = 0;");
+    const res = await ParentTree.remove(await ParentTree.findDescendants(nodeToBeDeleted));
+    await this.categoryRepository.query("SET foreign_key_checks = 1;");
+    return {
+      result: res.length > 0 ? 'Deleted successfully' : 'Already deleted'
+    }
+  }
+  */
 }
