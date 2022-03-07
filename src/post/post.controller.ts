@@ -7,21 +7,18 @@ import {
   Param,
   Delete,
   Query,
-  ParseIntPipe,
   Put,
 } from '@nestjs/common';
 import { PostService } from './post.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
-import { query } from 'express';
+import { PaginationDto } from './dto/pagination.dto';
 @Controller('post')
-
 export class PostController {
   constructor(private readonly postService: PostService) { }
 
   @Get()
   findAll() {
-
     return this.postService.findAll();
   }
 
@@ -31,10 +28,8 @@ export class PostController {
   }
 
   @Get('/:id')
-
   async findOne(@Param('id') id) {
-
-    return this.postService.findOne(parseInt(id));
+    return this.postService.findOne(+id);
   }
 
   @Post('/')
@@ -44,7 +39,7 @@ export class PostController {
 
   @Put(':id')
   update(@Param('id') id: number, @Body() body: UpdatePostDto) {
-    return this.postService.update(id, body);
+    return this.postService.update(+id, body);
   }
 
   @Patch(':id')
@@ -54,8 +49,7 @@ export class PostController {
   }
 
   @Delete(':id')
-
   delete(@Param('id') id) {
-    return this.postService.delete(+id);
+    return this.postService.remove(+id);
   }
 }
