@@ -47,7 +47,6 @@ describe('PostService', () => {
   });
 });
 
-
 jest.mock('./entities/Post.repository');
 describe('PostService', () => {
   let service: PostService;
@@ -67,7 +66,6 @@ describe('PostService', () => {
   beforeEach(() => {
     jest.restoreAllMocks();
   });
-
 
   it('should return one post', async () => {
     const posts: PostEntity = {
@@ -86,7 +84,6 @@ describe('PostService', () => {
   });
 });
 
-
 jest.mock('./entities/Post.repository');
 describe('PostService', () => {
   let service: PostService;
@@ -107,18 +104,17 @@ describe('PostService', () => {
     jest.restoreAllMocks();
   });
 
-
   it('should update one post', async () => {
     // Arrange
     const postId = 1;
     const postDto: UpdatePostDto = {
-      title: 'new title'
-    }
+      title: 'new title',
+    };
     const expectedPost = {
       title: postDto.title,
       id: postId,
-      description: ''
-    }
+      description: '',
+    };
 
     const updateSpy = jest
       .spyOn(postRepository, 'preload')
@@ -130,6 +126,6 @@ describe('PostService', () => {
     const result = await service.update(postId, postDto);
 
     expect(result).toEqual(expectedPost);
-    expect(saveSpy).toBeCalledWith(expectedPost)
+    expect(saveSpy).toBeCalledWith(expectedPost);
   });
 });
