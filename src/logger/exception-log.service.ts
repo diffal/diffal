@@ -5,7 +5,7 @@ import { ExceptionLogRepository } from './entities/exception-log.repository';
 export class ExceptionLogService {
   constructor(
     private readonly exceptionLogRepository: ExceptionLogRepository,
-  ) { }
+  ) {}
 
   insertLog(statusCode: number, message: string) {
     const log = this.exceptionLogRepository.create({

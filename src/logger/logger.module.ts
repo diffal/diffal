@@ -8,4 +8,4 @@ import { ExceptionLogService } from './exception-log.service';
   providers: [ExceptionLogService],
   exports: [ExceptionLogService],
 })
-export class LoggerModule { }
+export class LoggerModule {}
