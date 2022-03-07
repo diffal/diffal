@@ -1,29 +1,28 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { UserEntity } from './entities/user.entity';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 describe('UserController', () => {
   let controller: UserController;
   let service: FakeUserService;
 
-  class FakeUserService { 
-    findAll() : any {};
-    findOne(id:string) : any {};
-    remove(id:string) : any {};
-    create(createUserDto:CreateUserDto): any{};
-    update(id:string,updateUserDto:UpdateUserDto): any{}
- }
+  class FakeUserService {
+    findAll(): any {}
+    findOne(id: string): any {}
+    remove(id: string): any {}
+    create(createUserDto: CreateUserDto): any {}
+    update(id: string, updateUserDto: UpdateUserDto): any {}
+  }
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [],
       controllers: [UserController],
       providers: [UserService],
     })
-    .overrideProvider(UserService)
-    .useClass(FakeUserService)
-    .compile();
+      .overrideProvider(UserService)
+      .useClass(FakeUserService)
+      .compile();
 
     controller = module.get<UserController>(UserController);
     service = module.get<FakeUserService>(UserService);
@@ -52,19 +51,21 @@ describe('UserController', () => {
     // Arrange
     const users = [
       {
-        id:'1',
+        id: '1',
         name: 'mostafa',
         username: '123',
         password: '123',
       },
       {
-        id:'2',
+        id: '2',
         name: 'ali',
         username: '123',
         password: '123',
       },
     ];
-    const findAllSpy = jest.spyOn(service, 'findOne').mockResolvedValue(users[0]);
+    const findAllSpy = jest
+      .spyOn(service, 'findOne')
+      .mockResolvedValue(users[0]);
 
     // Act
     const expectedValue = await controller.findOne('1');
@@ -96,7 +97,9 @@ describe('UserController', () => {
       username: '1234',
       password: '1123',
     };
-    const findAllSpy = jest.spyOn(service, 'create').mockResolvedValue(testUser);
+    const findAllSpy = jest
+      .spyOn(service, 'create')
+      .mockResolvedValue(testUser);
 
     // Act
     const expectedValue = await controller.create(testUser);
@@ -111,13 +114,13 @@ describe('UserController', () => {
     // Arrange
     const users = [
       {
-        id:'1',
+        id: '1',
         name: 'mostafa',
         username: '123',
         password: '123',
       },
       {
-        id:'2',
+        id: '2',
         name: 'ali',
         username: '123',
         password: '123',
@@ -128,10 +131,12 @@ describe('UserController', () => {
       username: '1234',
       password: '1123',
     };
-    const findAllSpy = jest.spyOn(service, 'update').mockResolvedValue(updateUser);
+    const findAllSpy = jest
+      .spyOn(service, 'update')
+      .mockResolvedValue(updateUser);
 
     // Act
-    const expectedValue = await controller.update('1',updateUser);
+    const expectedValue = await controller.update('1', updateUser);
 
     // Assert
     expect(service.update).toBeCalled();

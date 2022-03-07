@@ -1,6 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import exp from 'constants';
 import { TestBedModule } from '../test-bed/test-bed.module';
 import { UserRepository } from './entities/user.repository';
 import { UserService } from './user.service';
