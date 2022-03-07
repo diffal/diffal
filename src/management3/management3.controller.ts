@@ -15,7 +15,7 @@ import { Response } from 'express';
 
 @Controller('management3')
 export class Management3Controller {
-  constructor(private readonly management3Service: Management3Service) { }
+  constructor(private readonly management3Service: Management3Service) {}
 
   @Post()
   create(@Body() createManagement3Dto: CreateManagement3Dto) {
@@ -26,8 +26,14 @@ export class Management3Controller {
   Root(@Res() res: Response) {
     return res.render('management3', {
       title: 'management3',
-      active: { management1: false, management2: false, management3: true, management4: false, management5: false, management6: false },
-
+      active: {
+        management1: false,
+        management2: false,
+        management3: true,
+        management4: false,
+        management5: false,
+        management6: false,
+      },
     });
   }
   findAll() {
