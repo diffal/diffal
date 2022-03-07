@@ -8,14 +8,16 @@ import {
   Delete,
   Query,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { PaginatedDto } from './dto/pageinated_category';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @Controller('categories')
+@ApiTags('Category')
 export class CategoriesController {
-  constructor(private readonly categoriesService: CategoriesService) {}
+  constructor(private readonly categoriesService: CategoriesService) { }
 
   @Post('/')
   create(@Body() createCategoryDto: CreateCategoryDto) {

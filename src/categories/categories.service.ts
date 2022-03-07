@@ -56,6 +56,8 @@ export class CategoriesService {
       }),
     );
   }
+  
+  
 
   async remove(id: number) {
     const delete_category = await this.findOne(id);

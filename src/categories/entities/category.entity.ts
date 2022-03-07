@@ -8,13 +8,13 @@ import {
 } from 'typeorm';
 
 @Entity('category')
-@Tree('nested-set')
+@Tree('closure-table')
 export class CategoryEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
   @Column()
   name: string;
-  @TreeChildren()
+  @TreeChildren({ cascade: true })
   childrens: CategoryEntity[];
   @TreeParent()
   parent: CategoryEntity;
