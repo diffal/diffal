@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { dbConfig } from './config/db.config';
 import { UserModule } from './user/user.module';
 import { TestBedModule } from './test-bed/test-bed.module';
+import { LoggerModule } from './logger/logger.module';
 import { Management1Module } from './management1/management1.module';
 import { Management2Module } from './management2/management2.module';
 import { Management3Module } from './management3/management3.module';
@@ -47,6 +48,7 @@ import { ExceptionLogModule } from './logger/exception-log.module';
       },
     }),
     TestBedModule,
+    LoggerModule,
     Management1Module,
     Management2Module,
     Management3Module,
