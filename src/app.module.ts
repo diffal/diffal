@@ -12,9 +12,9 @@ import { Management3Module } from './management3/management3.module';
 import { Management4Module } from './management4/management4.module';
 import { Management5Module } from './management5/management5.module';
 import { Management6Module } from './management6/management6.module';
-import { LoggerModule } from './logger/logger.module';
 import { APP_FILTER } from '@nestjs/core';
 import { LogExceptionFilter } from './common/filter/log-exception.filter';
+import { ExceptionLogModule } from './logger/exception-log.module';
 
 @Module({
   imports: [
@@ -53,7 +53,7 @@ import { LogExceptionFilter } from './common/filter/log-exception.filter';
     Management4Module,
     Management5Module,
     Management6Module,
-    LoggerModule,
+    ExceptionLogModule,
   ],
   controllers: [AppController],
   providers: [
