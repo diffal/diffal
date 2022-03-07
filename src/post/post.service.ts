@@ -6,39 +6,31 @@ import { PostRepository } from './entities/Post.repository';
 
 @Injectable()
 export class PostService {
-
-  constructor(private readonly postRepository: PostRepository) { }
+  constructor(private readonly postRepository: PostRepository) {}
 
   async create(createPostDto: CreatePostDto) {
     const post = this.postRepository.create({
-      ...createPostDto
+      ...createPostDto,
     });
     return this.postRepository.save(post);
   }
 
-
-
   async findAll(pagination?: PaginationDto) {
-
     const result = await this.postRepository.find();
     return result;
-
   }
 
   async findOne(id: number) {
-
     const result = await this.postRepository.findOne(id);
     if (!result) {
       throw new NotFoundException();
-    }
-    else {
+    } else {
       return result;
     }
   }
 
-
   async update(id: number, updatePostDto: UpdatePostDto) {
-    const post = await this.postRepository.preload({ id, ...updatePostDto })
+    const post = await this.postRepository.preload({ id, ...updatePostDto });
 
     return this.postRepository.save(post);
   }

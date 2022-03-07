@@ -5,7 +5,7 @@ import { PostController } from './post.controller';
 import { PostService } from './post.service';
 
 class fakePostService {
-  findAll(): any { }
+  findAll(): any {}
 }
 
 describe('PostController', () => {
@@ -17,12 +17,12 @@ describe('PostController', () => {
       controllers: [PostController],
       providers: [PostService],
     })
-      .overrideProvider(PostService).
-      useClass(fakePostService)
+      .overrideProvider(PostService)
+      .useClass(fakePostService)
       .compile();
 
     controller = module.get<PostController>(PostController);
-    service = module.get<fakePostService>(PostService)
+    service = module.get<fakePostService>(PostService);
   });
 
   it('should be defined', () => {
@@ -30,15 +30,17 @@ describe('PostController', () => {
   });
   it('should return all posts', async () => {
     //Arrange
-    const posts = []
-    
-    const findAllPosts = jest.spyOn(service, 'findAll').mockResolvedValue(posts);
+    const posts = [];
+
+    const findAllPosts = jest
+      .spyOn(service, 'findAll')
+      .mockResolvedValue(posts);
     //Act
     const expectedValue = await controller.findAll();
     //Assert
     expect(service.findAll).toBeCalled();
     expect(expectedValue).toEqual(posts);
 
-    findAllPosts.mockReset()
-  })
+    findAllPosts.mockReset();
+  });
 });
