@@ -7,6 +7,16 @@ import { dbConfig } from './config/db.config';
 import { UserModule } from './user/user.module';
 import { TestBedModule } from './test-bed/test-bed.module';
 import { UploadModule } from './upload/upload.module';
+import { LoggerModule } from './logger/logger.module';
+import { Management1Module } from './management1/management1.module';
+import { Management2Module } from './management2/management2.module';
+import { Management3Module } from './management3/management3.module';
+import { Management4Module } from './management4/management4.module';
+import { Management5Module } from './management5/management5.module';
+import { Management6Module } from './management6/management6.module';
+import { APP_FILTER } from '@nestjs/core';
+import { LogExceptionFilter } from './common/filter/log-exception.filter';
+import { ExceptionLogModule } from './logger/exception-log.module';
 
 @Module({
   imports: [
@@ -40,8 +50,22 @@ import { UploadModule } from './upload/upload.module';
     }),
     TestBedModule,
     UploadModule,
+    LoggerModule,
+    Management1Module,
+    Management2Module,
+    Management3Module,
+    Management4Module,
+    Management5Module,
+    Management6Module,
+    ExceptionLogModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_FILTER,
+      useClass: LogExceptionFilter,
+    },
+  ],
 })
 export class AppModule {}
