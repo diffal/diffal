@@ -37,12 +37,14 @@ describe('PostService', () => {
       description: '1st posts description',
     };
 
+
     const findSpy = jest
       .spyOn(postRepository, 'find')
       .mockResolvedValue([posts]);
 
     const retrivedPosts = await service.findAll();
 
+    expect(findSpy).toBeCalled;
     expect(retrivedPosts).toEqual([posts]);
   });
 });
@@ -80,6 +82,7 @@ describe('PostService', () => {
 
     const result = await service.findOne(1);
 
+    expect(find1Spy).toBeCalled;
     expect(result).toEqual(posts);
   });
 });
@@ -125,6 +128,7 @@ describe('PostService', () => {
 
     const result = await service.update(postId, postDto);
 
+    expect(updateSpy).toBeCalled;
     expect(result).toEqual(expectedPost);
     expect(saveSpy).toBeCalledWith(expectedPost);
   });
@@ -163,10 +167,12 @@ describe('PostService', () => {
 
     const result = await service.findOne(1);
 
-    const removeSpy= jest
-    .spyOn(postRepository, 'remove')
-    .mockResolvedValue(result)
+    const removeSpy = jest
+      .spyOn(postRepository, 'remove')
+      .mockResolvedValue(result);
 
-    expect(result).toBeNull
+    expect(find1Spy).toBeCalled;
+    expect(removeSpy).toBeCalled;
+    expect(result).toBeNull;
   });
 });
