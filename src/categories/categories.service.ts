@@ -11,7 +11,7 @@ export class CategoriesService {
   constructor(
     @InjectRepository(CategoryEntity)
     private readonly categoryRepository: Repository<CategoryEntity>,
-  ) {}
+  ) { }
   async preload_categories(item: string) {
     const category = await this.categoryRepository.findOne({
       where: {
@@ -64,34 +64,8 @@ export class CategoriesService {
     }
     return this.categoryRepository.remove(delete_category);
   }
-  
-    async remove_child(id: string, id_child: CategoryEntity) {
-      const findParent = await this.categoryRepository.findOne(id);
-      const findChild = await this.categoryRepository.findOne({
-       where:{
-         id:id_child.childrens
-       } 
-      })
-  
-      if (findChild != undefined || findParent == findChild) {
-        this.categoryRepository.remove(findParent)
-        return this.categoryRepository.remove(findChild)
-      }
-    }
-    
 
-  //Net solution*
-  /*
-  async delete_child(id: string) {
 
-    const ParentTree = await this.categoryRepository.getTreeRepository(CategoryEntity);
-    const nodeToBeDeleted = await this.categoryRepository.getTreeRepository(CategoryEntity).findOne(id);
-    await this.categoryRepository.query("SET foreign_key_checks = 0;");
-    const res = await ParentTree.remove(await ParentTree.findDescendants(nodeToBeDeleted));
-    await this.categoryRepository.query("SET foreign_key_checks = 1;");
-    return {
-      result: res.length > 0 ? 'Deleted successfully' : 'Already deleted'
-    }
-  }
-  */
+
+
 }

@@ -9,18 +9,15 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { PaginatedDto } from './dto/pageinated_category';
 import { UpdateCategoryDto } from './dto/update-category.dto';
-import { CategoryEntity } from './entities/category.entity';
 
 @Controller('categories')
 @ApiTags('Category')
 export class CategoriesController {
-  constructor(private readonly categoriesService: CategoriesService) {}
+  constructor(private readonly categoriesService: CategoriesService) { }
 
   @Post('/')
   create(@Body() createCategoryDto: CreateCategoryDto) {
@@ -54,9 +51,4 @@ export class CategoriesController {
     return this.categoriesService.remove(id);
   }
 
-  @Delete(':id/child')
-  delete(@Param('id')id:string, @Param('id_child')id_child:CategoryEntity){
-  
-    return this.categoriesService.remove_child(id,id_child)
-  }
 }

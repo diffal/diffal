@@ -1,11 +1,9 @@
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { ExceptionLogRepository } from './entities/exception-log.repository';
-import { ExceptionLogService } from './exception-log.service';
+import { Global, Module } from '@nestjs/common';
+import { LoggerService } from './logger.service';
 
+@Global()
 @Module({
-  imports: [TypeOrmModule.forFeature([ExceptionLogRepository])],
-  providers: [ExceptionLogService],
-  exports: [ExceptionLogService],
+  providers: [LoggerService],
+  exports: [LoggerService],
 })
 export class LoggerModule {}
