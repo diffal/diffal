@@ -129,3 +129,44 @@ describe('PostService', () => {
     expect(saveSpy).toBeCalledWith(expectedPost);
   });
 });
+
+jest.mock('./entities/Post.repository');
+describe('PostService', () => {
+  let service: PostService;
+  let postRepository: PostRepository;
+
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+
+      providers: [PostService, PostRepository],
+    }).compile();
+
+    service = module.get<PostService>(PostService);
+
+    postRepository = module.get<PostRepository>(PostRepository);
+  });
+  beforeEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('should remove one post', async () => {
+    const posts: PostEntity = {
+      title: 'new post 1',
+      id: 1,
+      description: '1st posts description',
+    };
+
+    const find1Spy = jest
+      .spyOn(postRepository, 'findOne')
+      .mockResolvedValue(posts);
+
+    const result = await service.findOne(1);
+
+    const removeSpy= jest
+    .spyOn(postRepository, 'remove')
+    .mockResolvedValue(result)
+
+    expect(result).toBeNull
+  });
+});
