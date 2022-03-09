@@ -6,17 +6,18 @@ import { AppService } from './app.service';
 import { dbConfig } from './config/db.config';
 import { UserModule } from './user/user.module';
 import { TestBedModule } from './test-bed/test-bed.module';
-<<<<<<< HEAD
 import { PostModule } from './post/post.module';
+import { UploadModule } from './upload/upload.module';
+import { LogRequestModule } from './log-request/log-request.module';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { LogRequestInterceptor } from './common/interceptors/log-request.interceptor';
 import { LoggerModule } from './logger/logger.module';
-=======
 import { Management1Module } from './management1/management1.module';
 import { Management2Module } from './management2/management2.module';
 import { Management3Module } from './management3/management3.module';
 import { Management4Module } from './management4/management4.module';
 import { Management5Module } from './management5/management5.module';
 import { Management6Module } from './management6/management6.module';
->>>>>>> 9988ee5893e99fbc68393c70e4d0de15eb58ad3f
 import { APP_FILTER } from '@nestjs/core';
 import { LogExceptionFilter } from './common/filter/log-exception.filter';
 import { ExceptionLogModule } from './logger/exception-log.module';
@@ -52,26 +53,28 @@ import { ExceptionLogModule } from './logger/exception-log.module';
       },
     }),
     TestBedModule,
-<<<<<<< HEAD
     PostModule,
-    LoggerModule,
-=======
+    UploadModule,
     Management1Module,
-    Management2Module,
     Management3Module,
     Management4Module,
     Management5Module,
     Management6Module,
     ExceptionLogModule,
->>>>>>> 9988ee5893e99fbc68393c70e4d0de15eb58ad3f
+    LogRequestModule,
+    LoggerModule,
   ],
   controllers: [AppController],
   providers: [
     AppService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: LogRequestInterceptor,
+    },
     {
       provide: APP_FILTER,
       useClass: LogExceptionFilter,
     },
   ],
 })
-export class AppModule {}
+export class AppModule { }

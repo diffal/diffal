@@ -3,10 +3,14 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { join } from 'path';
 import { AppModule } from './app.module';
+import { LoggerModule } from './logger/logger.module';
 import * as hbs from 'hbs';
+import { LoggerService } from './logger/logger.service';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const myLogger = await app.resolve<LoggerService>(LoggerService);
+  app.useLogger(myLogger);
 
   const options = new DocumentBuilder()
     .setTitle('Our Api Specification')

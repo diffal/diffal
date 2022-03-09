@@ -7,4 +7,5 @@ export enum Environment {
   DB_DATABASE = 'DB_DATABASE',
   DB_EXTRA = 'DB_EXTRA',
   DATABASE_URL = 'DATABASE_URL',
+  UPLOAD_ADDRESS = 'UPLOAD_ADDRESS',
 }
