@@ -11,7 +11,7 @@ export class CategoriesService {
   constructor(
     @InjectRepository(CategoryEntity)
     private readonly categoryRepository: Repository<CategoryEntity>,
-  ) { }
+  ) {}
   async preload_categories(item: string) {
     const category = await this.categoryRepository.findOne({
       where: {
@@ -64,8 +64,4 @@ export class CategoriesService {
     }
     return this.categoryRepository.remove(delete_category);
   }
-
-
-
-
 }

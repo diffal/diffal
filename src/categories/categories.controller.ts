@@ -17,7 +17,7 @@ import { UpdateCategoryDto } from './dto/update-category.dto';
 @Controller('categories')
 @ApiTags('Category')
 export class CategoriesController {
-  constructor(private readonly categoriesService: CategoriesService) { }
+  constructor(private readonly categoriesService: CategoriesService) {}
 
   @Post('/')
   create(@Body() createCategoryDto: CreateCategoryDto) {
@@ -50,5 +50,4 @@ export class CategoriesController {
   remove(@Param('id') id: string) {
     return this.categoriesService.remove(id);
   }
-
 }

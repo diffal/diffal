@@ -9,7 +9,10 @@ describe('CategoriesController', () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [CategoriesController],
       providers: [CategoriesService],
-    }).overrideProvider(CategoriesService).useValue({}).compile();
+    })
+      .overrideProvider(CategoriesService)
+      .useValue({})
+      .compile();
     // TODO: fix tests ASAP
 
     controller = module.get<CategoriesController>(CategoriesController);
@@ -18,6 +21,4 @@ describe('CategoriesController', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
-
-
 });

@@ -14,7 +14,10 @@ describe('CategoriesService', () => {
         TestBedModule.forRoot(),
         TypeOrmModule.forFeature([CategoryRepository]),
       ],
-    }).overrideProvider(CategoriesService).useValue({}).compile();
+    })
+      .overrideProvider(CategoriesService)
+      .useValue({})
+      .compile();
     // TODO: fix tests ASAP
 
     service = module.get<CategoriesService>(CategoriesService);
@@ -38,5 +41,4 @@ describe('CategoriesService', () => {
   //   const retrievedCategories = await service.findAll();
   //   expect(retrievedCategories).toEqual(categories);
   // });
-
 });
