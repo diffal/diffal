@@ -9,7 +9,8 @@ describe('CategoriesController', () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [CategoriesController],
       providers: [CategoriesService],
-    }).compile();
+    }).overrideProvider(CategoriesService).useValue({}).compile();
+    // TODO: fix tests ASAP
 
     controller = module.get<CategoriesController>(CategoriesController);
   });
