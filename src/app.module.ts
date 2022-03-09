@@ -7,6 +7,9 @@ import { dbConfig } from './config/db.config';
 import { UserModule } from './user/user.module';
 import { TestBedModule } from './test-bed/test-bed.module';
 import { UploadModule } from './upload/upload.module';
+import { LogRequestModule } from './log-request/log-request.module';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { LogRequestInterceptor } from './common/interceptors/log-request.interceptor';
 import { LoggerModule } from './logger/logger.module';
 import { Management1Module } from './management1/management1.module';
 import { Management2Module } from './management2/management2.module';
@@ -50,9 +53,7 @@ import { ExceptionLogModule } from './logger/exception-log.module';
     }),
     TestBedModule,
     UploadModule,
-    LoggerModule,
     Management1Module,
-    Management2Module,
     Management3Module,
     Management4Module,
     Management5Module,
@@ -62,6 +63,10 @@ import { ExceptionLogModule } from './logger/exception-log.module';
   controllers: [AppController],
   providers: [
     AppService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: LogRequestInterceptor,
+    },
     {
       provide: APP_FILTER,
       useClass: LogExceptionFilter,
