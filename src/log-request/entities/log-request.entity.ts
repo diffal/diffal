@@ -1,15 +1,16 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('user')
-export class UserEntity {
+@Entity('logRequest')
+export class LogRequestEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
   @Column()
-  name: string;
+  method: string;
+
   @Column()
-  username: string;
+  url: string;
+
   @Column()
-  password: string;
-  // @Column()
-  // createdAt: Date = new Date();
+  requestDate: Date;
 }
