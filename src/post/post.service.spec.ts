@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { PostEntity } from './entities/post.entity';
-import { PostRepository } from './entities/Post.repository';
+import { PostRepository } from './entities/post.repository';
 import { PostService } from './post.service';
 
 jest.mock('./entities/Post.repository');
