@@ -10,4 +10,6 @@ export class UserEntity {
   username: string;
   @Column()
   password: string;
+  // @Column()
+  // createdAt: Date = new Date();
 }
