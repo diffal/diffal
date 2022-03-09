@@ -4,7 +4,7 @@ import { PostEntity } from './entities/post.entity';
 import { PostRepository } from './entities/post.repository';
 import { PostService } from './post.service';
 
-jest.mock('./entities/Post.repository');
+jest.mock('./entities/post.repository');
 describe('PostService', () => {
   let service: PostService;
   let postRepository: PostRepository;
