@@ -15,7 +15,7 @@ export class PostService {
     return this.postRepository.save(post);
   }
 
-  async findAll(pagination?: PaginationDto) {
+  async findAll(_pagination?: PaginationDto) {
     const result = await this.postRepository.find();
     return result;
   }

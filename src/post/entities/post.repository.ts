@@ -5,10 +5,10 @@ import { PostEntity } from './post.entity';
 
 @EntityRepository(Post)
 export class PostRepository extends Repository<PostEntity> {
-  static save(posts: void) {
+  static save(_posts: void) {
     throw new Error('Method not implemented.');
   }
-  static create(arg0: { title: string; id: number; description: string }[]) {
+  static create(_arg0: { title: string; id: number; description: string }[]) {
     throw new Error('Method not implemented.');
   }
   async createPost(createPostDto: CreatePostDto) {
