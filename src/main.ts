@@ -5,10 +5,12 @@ import { join } from 'path';
 import { AppModule } from './app.module';
 import { LoggerModule } from './logger/logger.module';
 import * as hbs from 'hbs';
+import { LoggerService } from './logger/logger.service';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  // app.useLogger(app.get(LoggerModule));
+  const myLogger = await app.resolve<LoggerService>(LoggerService);
+  app.useLogger(myLogger);
 
   const options = new DocumentBuilder()
     .setTitle('Our Api Specification')

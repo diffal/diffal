@@ -60,6 +60,7 @@ import { ExceptionLogModule } from './logger/exception-log.module';
     Management6Module,
     ExceptionLogModule,
     LogRequestModule,
+    LoggerModule,
   ],
   controllers: [AppController],
   providers: [
