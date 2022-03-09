@@ -23,7 +23,11 @@ export class UploadController {
     },
   })
   @UseInterceptors(FileInterceptor('file'))
-  uploadSingle(@UploadedFile() file: Express.Multer.File): Express.Multer.File {
-    return file;
+  uploadSingle(@UploadedFile() file: Express.Multer.File) {
+    const response = {
+      fileName: file.filename,
+      fileAddress: file.destination + file.filename,
+    };
+    return response;
   }
 }
