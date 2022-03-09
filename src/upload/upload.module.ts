@@ -5,6 +5,7 @@ import { diskStorage } from 'multer';
 import { uldConfig } from 'src/config/uld.config';
 import { UploadController } from './upload.controller';
 import { UploadService } from './upload.service';
+import { UploadService } from './upload.service';
 
 @Module({
   imports: [
