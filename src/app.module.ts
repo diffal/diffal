@@ -59,6 +59,7 @@ import { ExceptionLogModule } from './logger/exception-log.module';
     Management5Module,
     Management6Module,
     ExceptionLogModule,
+    LogRequestModule,
   ],
   controllers: [AppController],
   providers: [
