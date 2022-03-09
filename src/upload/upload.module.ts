@@ -5,8 +5,6 @@ import { diskStorage } from 'multer';
 import { uldConfig } from 'src/config/uld.config';
 import { UploadController } from './upload.controller';
 import { UploadService } from './upload.service';
-import { UploadService } from './upload.service';
-
 @Module({
   imports: [
     MulterModule.registerAsync({
@@ -15,7 +13,7 @@ import { UploadService } from './upload.service';
       useFactory: (uldConfigService: ConfigType<typeof uldConfig>) => ({
         dest: uldConfigService.dest,
         storage: diskStorage({
-          destination: UploadService.destinationPath,
+          destination: uldConfigService.dest,
           filename: UploadService.customFileName,
         }),
       }),
