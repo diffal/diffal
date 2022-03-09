@@ -77,4 +77,4 @@ import { ExceptionLogModule } from './logger/exception-log.module';
     },
   ],
 })
-export class AppModule { }
+export class AppModule {}
