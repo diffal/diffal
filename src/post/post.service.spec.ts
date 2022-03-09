@@ -48,7 +48,7 @@ describe('PostService', () => {
   });
 });
 
-jest.mock('./entities/Post.repository');
+jest.mock('./entities/post.repository');
 describe('PostService', () => {
   let service: PostService;
   let postRepository: PostRepository;
@@ -86,7 +86,7 @@ describe('PostService', () => {
   });
 });
 
-jest.mock('./entities/Post.repository');
+jest.mock('./entities/post.repository');
 describe('PostService', () => {
   let service: PostService;
   let postRepository: PostRepository;
@@ -133,7 +133,7 @@ describe('PostService', () => {
   });
 });
 
-jest.mock('./entities/Post.repository');
+jest.mock('./entities/post.repository');
 describe('PostService', () => {
   let service: PostService;
   let postRepository: PostRepository;
