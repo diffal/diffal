@@ -7,6 +7,9 @@ import { dbConfig } from './config/db.config';
 import { UserModule } from './user/user.module';
 import { TestBedModule } from './test-bed/test-bed.module';
 import { PostModule } from './post/post.module';
+import { CategoriesModule } from './categories/categories.module';
+import { APP_FILTER } from '@nestjs/core';
+import { LogExceptionFilter } from './common/filter/log-exception.filter';
 import { UploadModule } from './upload/upload.module';
 import { LogRequestModule } from './log-request/log-request.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
@@ -18,8 +21,6 @@ import { Management3Module } from './management3/management3.module';
 import { Management4Module } from './management4/management4.module';
 import { Management5Module } from './management5/management5.module';
 import { Management6Module } from './management6/management6.module';
-import { APP_FILTER } from '@nestjs/core';
-import { LogExceptionFilter } from './common/filter/log-exception.filter';
 import { ExceptionLogModule } from './logger/exception-log.module';
 
 @Module({
@@ -54,6 +55,8 @@ import { ExceptionLogModule } from './logger/exception-log.module';
     }),
     TestBedModule,
     PostModule,
+    CategoriesModule,
+    LoggerModule,
     UploadModule,
     Management1Module,
     Management3Module,
