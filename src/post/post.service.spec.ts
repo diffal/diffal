@@ -37,7 +37,6 @@ describe('PostService', () => {
       description: '1st posts description',
     };
 
-
     const findSpy = jest
       .spyOn(postRepository, 'find')
       .mockResolvedValue([posts]);
