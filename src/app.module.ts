@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { dbConfig } from './config/db.config';
 import { UserModule } from './user/user.module';
 import { TestBedModule } from './test-bed/test-bed.module';
+import { PostModule } from './post/post.module';
 import { CategoriesModule } from './categories/categories.module';
 import { APP_FILTER } from '@nestjs/core';
 import { LogExceptionFilter } from './common/filter/log-exception.filter';
@@ -53,6 +54,7 @@ import { ExceptionLogModule } from './logger/exception-log.module';
       },
     }),
     TestBedModule,
+    PostModule,
     CategoriesModule,
     LoggerModule,
     UploadModule,
@@ -78,4 +80,4 @@ import { ExceptionLogModule } from './logger/exception-log.module';
     },
   ],
 })
-export class AppModule { }
+export class AppModule {}
