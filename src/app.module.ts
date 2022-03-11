@@ -22,6 +22,8 @@ import { Management4Module } from './management4/management4.module';
 import { Management5Module } from './management5/management5.module';
 import { Management6Module } from './management6/management6.module';
 import { ExceptionLogModule } from './logger/exception-log.module';
+import { ScheduleModule } from '@nestjs/schedule';
+import { CrawlModule } from './crawl/crawl.module';
 
 @Module({
   imports: [
@@ -66,6 +68,8 @@ import { ExceptionLogModule } from './logger/exception-log.module';
     ExceptionLogModule,
     LogRequestModule,
     LoggerModule,
+    ScheduleModule.forRoot(),
+    CrawlModule,
   ],
   controllers: [AppController],
   providers: [
