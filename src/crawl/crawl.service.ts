@@ -5,9 +5,9 @@ import { PostService } from '../post/post.service';
 
 @Injectable()
 export class CrawlService {
-  constructor(private readonly postService: PostService) {}
+  constructor(private readonly postService: PostService) { }
 
-  @Cron('*/10 * * * * *')
+  @Cron('0 */10 * * * *')
   async handleCron() {
     const categorylist = [
       'انتخاب دسته بندی',
@@ -48,7 +48,7 @@ export class CrawlService {
         Adverlist.push(Adverobject);
       },
     );
-    console.log('Count Advertice :', Adverlist.length);
-    console.log(Adverlist);
+    // console.log('Count Advertice :', Adverlist.length);
+    // console.log(Adverlist);
   }
 }
