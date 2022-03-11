@@ -33,7 +33,7 @@ describe('PostService', () => {
   it('should return all posts', async () => {
     const posts: PostEntity = {
       title: 'new post 1',
-      id: 1,
+      id: '1',
       description: '1st posts description',
     };
 
@@ -71,7 +71,7 @@ describe('PostService', () => {
   it('should return one post', async () => {
     const posts: PostEntity = {
       title: 'new post 1',
-      id: 1,
+      id: '1',
       description: '1st posts description',
     };
 
@@ -79,7 +79,7 @@ describe('PostService', () => {
       .spyOn(postRepository, 'findOne')
       .mockResolvedValue(posts);
 
-    const result = await service.findOne(1);
+    const result = await service.findOne('1');
 
     expect(find1Spy).toBeCalled;
     expect(result).toEqual(posts);
@@ -108,7 +108,7 @@ describe('PostService', () => {
 
   it('should update one post', async () => {
     // Arrange
-    const postId = 1;
+    const postId = '1';
     const postDto: UpdatePostDto = {
       title: 'new title',
     };
@@ -156,7 +156,7 @@ describe('PostService', () => {
   it('should remove one post', async () => {
     const posts: PostEntity = {
       title: 'new post 1',
-      id: 1,
+      id: '1',
       description: '1st posts description',
     };
 
@@ -164,7 +164,7 @@ describe('PostService', () => {
       .spyOn(postRepository, 'findOne')
       .mockResolvedValue(posts);
 
-    const result = await service.findOne(1);
+    const result = await service.findOne('1');
 
     const removeSpy = jest
       .spyOn(postRepository, 'remove')

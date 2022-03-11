@@ -1,16 +1,14 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { CreateCrawlDto } from './dto/create-crawl.dto';
-import { UpdateCrawlDto } from './dto/update-crawl.dto';
+import { Injectable } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
 import got from 'got';
+import { PostService } from '../post/post.service';
 
 @Injectable()
 export class CrawlService {
-  private readonly logger = new Logger(CrawlService.name);
+  constructor(private readonly postService: PostService) {}
 
   @Cron('*/10 * * * * *')
   async handleCron() {
-    // var response2 = await got(`https://api.divar.ir/v8/web-search/mashhad/auto`);
     const categorylist = [
       'انتخاب دسته بندی',
       'buy-old-house',
@@ -31,50 +29,26 @@ export class CrawlService {
       'jobs',
     ];
     const category = categorylist[1];
-    const response2 = await got(
+    const response = await got(
       `https://api.divar.ir/v8/web-search/mashhad/${category}`,
     );
 
-    const json = JSON.parse(response2.body);
-    const carlist: { tokenid: string; title: string; descript: string }[] = [];
+    const json = JSON.parse(response.body);
+    const Adverlist: { title: string; descript: string }[] = [];
     json.widget_list.forEach(
       (item: {
         data: { token: string; title: string; description: string };
       }) => {
-        const carobject = {
-          tokenid: item.data.token,
+        const tokenid = item.data.token;
+        const Adverobject = {
           title: item.data.title,
           descript: item.data.description,
         };
-
-        carlist.push(carobject);
+        this.postService.update(tokenid, Adverobject);
+        Adverlist.push(Adverobject);
       },
     );
-    // for (let i = 0; i < 10; i++) {
-    //   this.logger.debug(carlist[i].title, carlist[i].price, carlist[i].kilometer);
-
-    // }
-    console.log('Count Advertice :', carlist.length);
-    console.log(carlist);
-  }
-
-  create(createCrawlDto: CreateCrawlDto) {
-    return 'This action adds a new crawl';
-  }
-
-  findAll() {
-    return `This action returns all crawl`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} crawl`;
-  }
-
-  update(id: number, updateCrawlDto: UpdateCrawlDto) {
-    return `This action updates a #${id} crawl`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} crawl`;
+    console.log('Count Advertice :', Adverlist.length);
+    console.log(Adverlist);
   }
 }

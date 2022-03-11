@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { CrawlService } from './crawl.service';
-import { CrawlController } from './crawl.controller';
+import { PostService } from '../post/post.service';
 
 @Module({
-  controllers: [CrawlController],
+  imports: [PostService],
   providers: [CrawlService],
 })
 export class CrawlModule {}
