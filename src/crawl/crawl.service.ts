@@ -7,7 +7,7 @@ import { PostService } from '../post/post.service';
 export class CrawlService {
   constructor(private readonly postService: PostService) { }
 
-  @Cron('0 */10 * * * *')
+  @Cron('60 * * * * *')
   async handleCron() {
     const categorylist = [
       'انتخاب دسته بندی',
