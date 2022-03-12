@@ -8,6 +8,6 @@ export class PostEntity {
   @Column()
   title: string;
 
-  @Column({ type: 'nvarchar', length: '5000' })
+  @Column()
   description: string;
 }
