@@ -12,8 +12,13 @@ import {
 export class CategoryEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
   @Column()
   name: string;
+
   @TreeChildren({ cascade: true })
   childrens: CategoryEntity[];
+
+  @TreeParent()
+  parent: CategoryEntity;
 }
