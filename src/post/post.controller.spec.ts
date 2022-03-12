@@ -10,7 +10,7 @@ describe('PostController', () => {
   let service: PostService;
   const post: PostEntity = {
     description: 'discription',
-    id: 2,
+    id: '2',
     title: 'title',
   };
 
@@ -57,9 +57,9 @@ describe('PostController', () => {
         const updatespy = jest
           .spyOn(service, 'update')
           .mockResolvedValue(updatedPost);
-        const result = await controller.update(2, postStub);
+        const result = await controller.update('2', postStub);
 
-        expect(updatespy).toBeCalledWith(2, postStub);
+        expect(updatespy).toBeCalledWith('2', postStub);
         expect(result).toEqual(updatedPost);
       });
     });
@@ -69,7 +69,7 @@ describe('PostController', () => {
         const findOneSpy = jest
           .spyOn(service, 'findOne')
           .mockResolvedValue(post);
-        const result = await controller.findOne(2);
+        const result = await controller.findOne('2');
         expect(findOneSpy).toBeCalled;
         expect(result).toEqual(post);
       });
@@ -77,7 +77,7 @@ describe('PostController', () => {
     describe('delete', () => {
       it('should delete post', async () => {
         const deletSpy = jest.spyOn(service, 'remove').mockResolvedValue(post);
-        const result = await controller.delete(2);
+        const result = await controller.delete('2');
         expect(deletSpy).toBeCalled;
         expect(result).toBeNull;
       });

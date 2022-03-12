@@ -2,8 +2,8 @@ import { IsString } from 'class-validator';
 
 export class CreatePostDto {
   @IsString()
-  description: string;
+  title: string;
 
   @IsString()
-  title: string;
+  description: string;
 }

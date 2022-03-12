@@ -20,7 +20,7 @@ export class PostService {
     return result;
   }
 
-  async findOne(id: number) {
+  async findOne(id: string) {
     const result = await this.postRepository.findOne(id);
     if (!result) {
       throw new NotFoundException();
@@ -29,13 +29,12 @@ export class PostService {
     }
   }
 
-  async update(id: number, updatePostDto: UpdatePostDto) {
+  async update(id: string, updatePostDto: UpdatePostDto) {
     const post = await this.postRepository.preload({ id, ...updatePostDto });
-
     return this.postRepository.save(post);
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     const post = await this.postRepository.findOne(id);
     return this.postRepository.remove(post);
   }

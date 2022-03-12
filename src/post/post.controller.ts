@@ -29,7 +29,7 @@ export class PostController {
 
   @Get('/:id')
   async findOne(@Param('id') id) {
-    return this.postService.findOne(+id);
+    return this.postService.findOne(id);
   }
 
   @Post('/')
@@ -38,18 +38,18 @@ export class PostController {
   }
 
   @Put(':id')
-  update(@Param('id') id: number, @Body() body: UpdatePostDto) {
-    return this.postService.update(+id, body);
+  update(@Param('id') id: string, @Body() body: UpdatePostDto) {
+    return this.postService.update(id, body);
   }
 
   @Patch(':id')
   patch(@Param('id') id, @Body() body: UpdatePostDto) {
     console.log(body instanceof UpdatePostDto);
-    return this.postService.update(+id, body);
+    return this.postService.update(id, body);
   }
 
   @Delete(':id')
   delete(@Param('id') id) {
-    return this.postService.remove(+id);
+    return this.postService.remove(id);
   }
 }
