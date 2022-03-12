@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TestBedModule } from '../test-bed/test-bed.module';
 import { CategoriesService } from './categories.service';
-import { CategoryRepository } from './entities/category.Repository';
+import { CategoryRepository } from './entities/category.repository';
 
 describe('CategoriesService', () => {
   let service: CategoriesService;

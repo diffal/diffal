@@ -17,7 +17,7 @@ import { UpdateCategoryDto } from './dto/update-category.dto';
 @Controller('categories')
 @ApiTags('Category')
 export class CategoriesController {
-  constructor(private readonly categoriesService: CategoriesService) {}
+  constructor(private readonly categoriesService: CategoriesService) { }
 
   @Post('/')
   create(@Body() createCategoryDto: CreateCategoryDto) {
@@ -25,8 +25,12 @@ export class CategoriesController {
   }
 
   @Get('/all')
-  findAll() {
+  findAllCategory() {
     return this.categoriesService.findAllCategory();
+  }
+  @Get()
+  findAll(@Query() paginatedDto: PaginatedDto) {
+    return this.categoriesService.findAll(paginatedDto);
   }
 
   @Get(':id')
