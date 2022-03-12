@@ -5,7 +5,7 @@ import { PostService } from '../post/post.service';
 
 @Injectable()
 export class CrawlService {
-  constructor(private readonly postService: PostService) { }
+  constructor(private readonly postService: PostService) {}
 
   @Cron('60 * * * * *')
   async handleCron() {

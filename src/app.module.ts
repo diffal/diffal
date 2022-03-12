@@ -47,6 +47,7 @@ import { CrawlModule } from './crawl/crawl.module';
             password: dbConfigService.password,
             database: dbConfigService.database,
             synchronize: true,
+            logging: false,
             autoLoadEntities: true,
             ...(dbConfigService.extra && {
               extra: JSON.parse(dbConfigService.extra),
@@ -69,7 +70,6 @@ import { CrawlModule } from './crawl/crawl.module';
     LogRequestModule,
     LoggerModule,
     ScheduleModule.forRoot(),
-    CrawlModule,
   ],
   controllers: [AppController],
   providers: [
