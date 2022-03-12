@@ -5,13 +5,11 @@ import { CreateCategoryDto } from './dto/create-category.dto';
 import { PaginatedDto } from './dto/pageinated_category';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { CategoryEntity } from './entities/category.entity';
+import { CategoryRepository } from './entities/category.Repository';
 
 @Injectable()
 export class CategoriesService {
-  constructor(
-    @InjectRepository(CategoryEntity)
-    private readonly categoryRepository: Repository<CategoryEntity>,
-  ) {}
+  constructor(private readonly categoryRepository: CategoryRepository) {}
   async preload_categories(item: string) {
     const category = await this.categoryRepository.findOne({
       where: {
@@ -36,6 +34,9 @@ export class CategoriesService {
     });
     return this.categoryRepository.save(category);
   }
+  findAllCategory() {
+    return this.categoryRepository.find();
+  }
 
   findAll(pageinated?: PaginatedDto) {
     return this.categoryRepository.find({
@@ -45,16 +46,8 @@ export class CategoriesService {
     });
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return this.categoryRepository.findOne(id);
-  }
-
-  async update(id: number, updateCategoryDto: UpdateCategoryDto) {
-    const categories = await Promise.all(
-      updateCategoryDto.categories.map((_item) => {
-        return this.preload_categories(_item);
-      }),
-    );
   }
 
   async remove(id: string) {
@@ -63,5 +56,21 @@ export class CategoriesService {
       throw new NotFoundException('not found category');
     }
     return this.categoryRepository.remove(delete_category);
+  }
+  async update(id: string, updateCategoryDto: UpdateCategoryDto) {
+    const categories = await Promise.all(
+      updateCategoryDto.categories.map((_item) => {
+        return this.preload_categories(_item);
+      }),
+    );
+    const student = this.categoryRepository.create({
+      id: id,
+      ...updateCategoryDto,
+      childrens: categories,
+    });
+    if (!student) {
+      throw new NotFoundException(`The student with ${id} not found`);
+    }
+    return this.categoryRepository.save(student);
   }
 }
