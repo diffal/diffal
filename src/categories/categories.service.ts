@@ -6,7 +6,7 @@ import { CategoryRepository } from './entities/category.Repository';
 
 @Injectable()
 export class CategoriesService {
-  constructor(private readonly categoryRepository: CategoryRepository) { }
+  constructor(private readonly categoryRepository: CategoryRepository) {}
 
   async preload_categories(item: string) {
     const category = await this.categoryRepository.findOne({
@@ -47,8 +47,6 @@ export class CategoriesService {
   findOne(id: string) {
     return this.categoryRepository.findOne(id);
   }
-
-
 
   async remove(id: string) {
     const delete_category = await this.categoryRepository.findOne(id);
