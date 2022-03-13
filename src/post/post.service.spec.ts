@@ -121,18 +121,27 @@ describe('PostService', () => {
       {
         title: 'new post 3',
         id: '1',
-        description: 'eeeeeeeeeeeeeee',
+        description: 'deseeeeeeeeeeee',
       },
     ];
-
     const searchSpy = jest
       .spyOn(postRepository, 'find')
       .mockResolvedValue(posts);
 
     const result = await service.search('des');
+    const testans = [];
+    posts.forEach((item) => {
+      if (
+        item.title.indexOf('des') != -1 ||
+        item.description.indexOf('des') != -1
+      ) {
+        testans.push(1);
+      }
+    });
 
     expect(searchSpy).toBeCalled;
     expect(result).toEqual(posts);
+    expect(testans).toEqual([1, 1, 1]);
   });
 });
 
