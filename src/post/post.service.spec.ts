@@ -106,6 +106,56 @@ describe('PostService', () => {
     jest.restoreAllMocks();
   });
 
+  it('should return all searched posts', async () => {
+    const posts: PostEntity[] = [
+      {
+        title: 'new post 1',
+        id: '1',
+        description: '1st posts description',
+      },
+      {
+        title: 'des post 2',
+        id: '1',
+        description: 'rgeidsghbnurfhnjge',
+      },
+      {
+        title: 'new post 3',
+        id: '1',
+        description: 'eeeeeeeeeeeeeee',
+      },
+    ];
+
+    const searchSpy = jest
+      .spyOn(postRepository, 'find')
+      .mockResolvedValue(posts);
+
+    const result = await service.search('des');
+
+    expect(searchSpy).toBeCalled;
+    expect(result).toEqual(posts);
+  });
+});
+
+jest.mock('./entities/post.repository');
+describe('PostService', () => {
+  let service: PostService;
+  let postRepository: PostRepository;
+
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+
+      providers: [PostService, PostRepository],
+    }).compile();
+
+    service = module.get<PostService>(PostService);
+
+    postRepository = module.get<PostRepository>(PostRepository);
+  });
+  beforeEach(() => {
+    jest.restoreAllMocks();
+  });
+
   it('should update one post', async () => {
     // Arrange
     const postId = '1';
