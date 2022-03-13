@@ -70,6 +70,7 @@ import { CrawlModule } from './crawl/crawl.module';
     LogRequestModule,
     LoggerModule,
     ScheduleModule.forRoot(),
+    CrawlModule,
   ],
   controllers: [AppController],
   providers: [

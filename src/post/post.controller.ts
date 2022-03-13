@@ -32,14 +32,14 @@ export class PostController {
     return this.postService.findOne(id);
   }
 
-  @Post('/')
-  insert(@Body() body: CreatePostDto) {
-    return this.postService.create(body);
+  @Post()
+  async insert(@Body() body: CreatePostDto) {
+    return await this.postService.create(body);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() body: UpdatePostDto) {
-    return this.postService.update(id, body);
+  async update(@Param('id') id: string, @Body() body: UpdatePostDto) {
+    return await this.postService.update(id, body);
   }
 
   @Patch(':id')
