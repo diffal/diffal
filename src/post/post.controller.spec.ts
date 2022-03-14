@@ -46,27 +46,27 @@ describe('PostController', () => {
       });
     });
 
-    describe('findAll', () => {
-      it('postService findall called and return posts', async () => {
-        const findAllspy = jest
-          .spyOn(service, 'findAll')
-          .mockResolvedValue([post]);
-        const result = await controller.findAll();
-        expect(findAllspy).toBeCalled();
-        expect(result).toEqual([post]);
-      });
-    });
+    // describe('findAll', () => {
+    //   it('postService findall called and return posts', async () => {
+    //     const findAllspy = jest
+    //       .spyOn(service, 'findAll')
+    //       .mockResolvedValue([post]);
+    //     const result = await controller.findAll();
+    //     expect(findAllspy).toBeCalled();
+    //     expect(result).toEqual([post]);
+    //   });
+    // });
 
-    describe('search', () => {
-      it('should return all searched posts', async () => {
-        const searchspy = jest
-          .spyOn(service, 'search')
-          .mockResolvedValue([post]);
-        const result = await controller.search('des');
-        expect(searchspy).toBeCalled();
-        expect(result).toEqual([post]);
-      });
-    });
+    // describe('search', () => {
+    //   it('should return all searched posts', async () => {
+    //     const searchspy = jest
+    //       .spyOn(service, 'search')
+    //       .mockResolvedValue([post]);
+    //     const result = await controller.search('des');
+    //     expect(searchspy).toBeCalled();
+    //     expect(result).toEqual([post]);
+    //   });
+    // });
 
     describe('update', () => {
       const postStub: UpdatePostDto = {

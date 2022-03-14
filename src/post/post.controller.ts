@@ -20,7 +20,7 @@ export class PostController {
   constructor(private readonly postService: PostService) {}
 
   @Get()
-  async findAll(@Res() res: Response) {
+  async findAll(@Res() res?: Response) {
     const result = await this.postService.findAll();
     return res.render('archive-post', {
       posts: result,
@@ -39,8 +39,12 @@ export class PostController {
   }
 
   @Get('/search/q?')
-  async search(@Query('text') text: string) {
-    return this.postService.search(text);
+  async search(@Query('text') text: string, @Res() res?: Response) {
+    const result = await this.postService.search(text);
+    return res.render('search', {
+      posts: result,
+      title: ` نتایج جستجو برای '${text}'`,
+    });
   }
 
   @Post('/')
