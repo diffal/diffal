@@ -11,7 +11,7 @@ import {
 import { ApiTags } from '@nestjs/swagger';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
-import { PaginatedDto } from './dto/pageinated_category';
+import { PaginatedDto } from './dto/pageinated-category';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @Controller('categories')
@@ -24,6 +24,10 @@ export class CategoriesController {
     return this.categoriesService.create(createCategoryDto);
   }
 
+  @Get('/all')
+  findAllCategory() {
+    return this.categoriesService.findAllCategory();
+  }
   @Get()
   findAll(@Query() paginatedDto: PaginatedDto) {
     return this.categoriesService.findAll(paginatedDto);

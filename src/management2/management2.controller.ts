@@ -23,7 +23,7 @@ export class Management2Controller {
   }
 
   @Get()
-  Root(@Res() res: Response) {
+  root(@Res() res: Response) {
     return res.render('management2', {
       title: 'management2',
       active: {
