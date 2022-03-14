@@ -8,8 +8,10 @@ import {
   Delete,
   Query,
   Put,
+  Res,
 } from '@nestjs/common';
 import { PostService } from './post.service';
+import { Response } from 'express';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { PaginationDto } from './dto/pagination.dto';
@@ -30,6 +32,16 @@ export class PostController {
   @Get('/:id')
   async findOne(@Param('id') id) {
     return this.postService.findOne(id);
+  }
+
+  @Get()
+  Root(@Res() res: Response) {
+    return res.render('post', {
+      title: 'posts',
+      active: {
+        post: true,
+      },
+    });
   }
 
   @Post('/')

@@ -62,6 +62,7 @@ import { CrawlModule } from './crawl/crawl.module';
     LoggerModule,
     UploadModule,
     Management1Module,
+    Management2Module,
     Management3Module,
     Management4Module,
     Management5Module,
