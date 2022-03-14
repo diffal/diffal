@@ -35,6 +35,7 @@ describe('PostService', () => {
       title: 'new post 1',
       id: '1',
       description: '1st posts description',
+      image: 'test image src'
     };
 
     const findSpy = jest
@@ -73,6 +74,8 @@ describe('PostService', () => {
       title: 'new post 1',
       id: '1',
       description: '1st posts description',
+      image: 'test image src'
+
     };
 
     const find1Spy = jest
@@ -112,16 +115,21 @@ describe('PostService', () => {
         title: 'new post 1',
         id: '1',
         description: '1st posts description',
+        image: 'test image src'
       },
       {
         title: 'des post 2',
         id: '1',
         description: 'rgeidsghbnurfhnjge',
+        image: 'test image src'
+
       },
       {
         title: 'new post 3',
         id: '1',
         description: 'deseeeeeeeeeeee',
+        image: 'test image src'
+
       },
     ];
     const searchSpy = jest
@@ -175,6 +183,7 @@ describe('PostService', () => {
       title: postDto.title,
       id: postId,
       description: '',
+      image: ''
     };
 
     const updateSpy = jest
@@ -217,6 +226,8 @@ describe('PostService', () => {
       title: 'new post 1',
       id: '1',
       description: '1st posts description',
+      image: 'test image src'
+
     };
 
     const find1Spy = jest

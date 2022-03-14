@@ -18,9 +18,8 @@ import { PostService } from '../post/post.service';
 export class Management1Controller {
   constructor(
     private readonly management1Service: Management1Service,
-    private readonly postService: PostService
-
-  ) { }
+    private readonly postService: PostService,
+  ) {}
 
   @Post()
   create(@Body() createManagement1Dto: CreateManagement1Dto) {
@@ -29,7 +28,7 @@ export class Management1Controller {
 
   @Get()
   async root(@Res() res: Response) {
-    let AdverList = await this.postService.findAll()
+    const AdverList = await this.postService.findAll();
     // console.log(AdverList)
     return res.render('management1', {
       title: 'PostManagment',
@@ -41,7 +40,7 @@ export class Management1Controller {
         management5: false,
         management6: false,
       },
-      AdverList
+      AdverList,
     });
   }
 

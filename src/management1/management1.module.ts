@@ -8,4 +8,4 @@ import { PostModule } from '../post/post.module';
   controllers: [Management1Controller],
   providers: [Management1Service],
 })
-export class Management1Module { }
+export class Management1Module {}

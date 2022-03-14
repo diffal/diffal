@@ -12,6 +12,8 @@ describe('PostController', () => {
     description: 'description',
     id: '2',
     title: 'title',
+    image: 'test image src'
+
   };
 
   beforeAll(async () => {

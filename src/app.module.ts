@@ -86,4 +86,4 @@ import { CrawlModule } from './crawl/crawl.module';
     },
   ],
 })
-export class AppModule { }
+export class AppModule {}
