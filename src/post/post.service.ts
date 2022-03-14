@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { Like } from 'typeorm';
 import { CreatePostDto } from './dto/create-post.dto';
 import { PaginationDto } from './dto/pagination.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
@@ -24,6 +25,17 @@ export class PostService {
     const result = await this.postRepository.findOne(id);
     if (!result) {
       throw new NotFoundException();
+    } else {
+      return result;
+    }
+  }
+
+  async search(text: string) {
+    const result = await this.postRepository.find({
+      where: [{ title: Like(`%${text}%`) }, { description: Like(`%${text}%`) }],
+    });
+    if (result == []) {
+      throw new NotFoundException('No items found for search');
     } else {
       return result;
     }
