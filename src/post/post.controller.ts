@@ -20,8 +20,12 @@ export class PostController {
   constructor(private readonly postService: PostService) {}
 
   @Get()
-  findAll() {
-    return this.postService.findAll();
+  async findAll(@Res() res: Response) {
+    const result = await this.postService.findAll();
+    return res.render('archive-post', {
+      posts: result,
+      title: 'آگهی ها-سایت دیفال',
+    });
   }
 
   @Get('/paginate')
@@ -32,16 +36,6 @@ export class PostController {
   @Get('/:id')
   async findOne(@Param('id') id) {
     return this.postService.findOne(id);
-  }
-
-  @Get()
-  Root(@Res() res: Response) {
-    return res.render('post', {
-      title: 'posts',
-      active: {
-        post: true,
-      },
-    });
   }
 
   @Post('/')
