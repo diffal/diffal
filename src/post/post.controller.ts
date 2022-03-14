@@ -15,7 +15,7 @@ import { UpdatePostDto } from './dto/update-post.dto';
 import { PaginationDto } from './dto/pagination.dto';
 @Controller('post')
 export class PostController {
-  constructor(private readonly postService: PostService) {}
+  constructor(private readonly postService: PostService) { }
 
   @Get()
   findAll() {
@@ -37,14 +37,14 @@ export class PostController {
     return this.postService.search(text);
   }
 
-  @Post('/')
-  insert(@Body() body: CreatePostDto) {
-    return this.postService.create(body);
+  @Post()
+  async insert(@Body() body: CreatePostDto) {
+    return await this.postService.create(body);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() body: UpdatePostDto) {
-    return this.postService.update(id, body);
+  async update(@Param('id') id: string, @Body() body: UpdatePostDto) {
+    return await this.postService.update(id, body);
   }
 
   @Patch(':id')

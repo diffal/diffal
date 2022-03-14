@@ -10,10 +10,8 @@ export class PostService {
   constructor(private readonly postRepository: PostRepository) {}
 
   async create(createPostDto: CreatePostDto) {
-    const post = this.postRepository.create({
-      ...createPostDto,
-    });
-    return this.postRepository.save(post);
+    const post = this.postRepository.create(createPostDto);
+    return await this.postRepository.save(post);
   }
 
   async findAll(_pagination?: PaginationDto) {
@@ -23,11 +21,7 @@ export class PostService {
 
   async findOne(id: string) {
     const result = await this.postRepository.findOne(id);
-    if (!result) {
-      throw new NotFoundException();
-    } else {
-      return result;
-    }
+    return result;
   }
 
   async search(text: string) {
@@ -43,11 +37,11 @@ export class PostService {
 
   async update(id: string, updatePostDto: UpdatePostDto) {
     const post = await this.postRepository.preload({ id, ...updatePostDto });
-    return this.postRepository.save(post);
+    return await this.postRepository.save(post);
   }
 
   async remove(id: string) {
     const post = await this.postRepository.findOne(id);
-    return this.postRepository.remove(post);
+    return await this.postRepository.remove(post);
   }
 }

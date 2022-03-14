@@ -12,10 +12,15 @@ import { CreateManagement1Dto } from './dto/create-management1.dto';
 import { UpdateManagement1Dto } from './dto/update-management1.dto';
 import { Res } from '@nestjs/common';
 import { Response } from 'express';
+import { PostService } from '../post/post.service';
 
 @Controller('management1')
 export class Management1Controller {
-  constructor(private readonly management1Service: Management1Service) {}
+  constructor(
+    private readonly management1Service: Management1Service,
+    private readonly postService: PostService
+
+  ) { }
 
   @Post()
   create(@Body() createManagement1Dto: CreateManagement1Dto) {
@@ -23,9 +28,11 @@ export class Management1Controller {
   }
 
   @Get()
-  root(@Res() res: Response) {
+  async root(@Res() res: Response) {
+    let AdverList = await this.postService.findAll()
+    // console.log(AdverList)
     return res.render('management1', {
-      title: 'management1',
+      title: 'PostManagment',
       active: {
         management1: true,
         management2: false,
@@ -34,6 +41,7 @@ export class Management1Controller {
         management5: false,
         management6: false,
       },
+      AdverList
     });
   }
 

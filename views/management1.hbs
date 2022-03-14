@@ -18,6 +18,13 @@
         </div>
         <div>
             <h1>مدیریت 1</h1>
+            <div>
+                {{#each AdverList }}
+                <div>{{this.title}}</div>
+                <div>{{this.description}}</div>
+                <img style="border-radius: 15px;" src={{this.image}}>
+                {{/each}}
+            </div>
         </div>
     </div>
     {{>footer active}}

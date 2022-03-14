@@ -62,6 +62,7 @@ import { CrawlModule } from './crawl/crawl.module';
     LoggerModule,
     UploadModule,
     Management1Module,
+    Management2Module,
     Management3Module,
     Management4Module,
     Management5Module,
@@ -70,6 +71,7 @@ import { CrawlModule } from './crawl/crawl.module';
     LogRequestModule,
     LoggerModule,
     ScheduleModule.forRoot(),
+    CrawlModule,
   ],
   controllers: [AppController],
   providers: [
@@ -84,4 +86,4 @@ import { CrawlModule } from './crawl/crawl.module';
     },
   ],
 })
-export class AppModule {}
+export class AppModule { }
