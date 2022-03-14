@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create-category.dto';
-import { PaginatedDto } from './dto/pageinated_category';
+import { PaginatedDto } from './dto/pageinated-category';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { CategoryRepository } from './entities/category.repository';
 
@@ -32,6 +32,9 @@ export class CategoriesService {
     });
     return this.categoryRepository.save(category);
   }
+  findAllCategory() {
+    return this.categoryRepository.find();
+  }
 
   findAll(pageinated?: PaginatedDto) {
     return this.categoryRepository.find({
@@ -43,15 +46,6 @@ export class CategoriesService {
 
   findOne(id: string) {
     return this.categoryRepository.findOne(id);
-  }
-
-  async update(id: string, updateCategoryDto: UpdateCategoryDto) {
-    // TODO: fix this weird update !!!!!!!!!!!!!!!!!!!!!!!
-    const categories = await Promise.all(
-      updateCategoryDto.categories.map((_item) => {
-        return this.preload_categories(_item);
-      }),
-    );
   }
 
   async remove(id: string) {
@@ -70,5 +64,21 @@ export class CategoriesService {
 
     // delete the node itself
     return this.categoryRepository.remove(delete_category);
+  }
+  async update(id: string, updateCategoryDto: UpdateCategoryDto) {
+    const categories = await Promise.all(
+      updateCategoryDto.categories.map((_item) => {
+        return this.preload_categories(_item);
+      }),
+    );
+    const student = this.categoryRepository.create({
+      id: id,
+      ...updateCategoryDto,
+      childrens: categories,
+    });
+    if (!student) {
+      throw new NotFoundException(`The student with ${id} not found`);
+    }
+    return this.categoryRepository.save(student);
   }
 }
