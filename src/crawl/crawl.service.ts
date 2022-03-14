@@ -9,46 +9,25 @@ export class CrawlService {
 
   @Cron('60 * * * * *')
   async handleCron() {
-    const categorylist = [
-      'انتخاب دسته بندی',
-      'buy-old-house',
-      'buy-villa',
-      'buy-apartment',
-      'buy-residential',
-      'auto',
-      'classic-car',
-      'rental-car',
-      'heavy-car',
-      'electronic-devices',
-      'home-kitchen',
-      'services',
-      'personal-goods',
-      'entertainment',
-      'social-services',
-      'tools-materials-equipment',
-      'jobs',
-    ];
-    const category = categorylist[1];
-    const response = await got(
-      `https://api.divar.ir/v8/web-search/mashhad/${category}`,
-    );
+    const response = await got(`https://api.divar.ir/v8/web-search/mashhad`);
 
     const json = JSON.parse(response.body);
-    const Adverlist: { title: string; descript: string }[] = [];
-    json.widget_list.forEach(
-      (item: {
+    const Adverlist: { id: string; title: string; description: string }[] = [];
+    json.web_widgets.post_list.forEach(
+      async (item: {
         data: { token: string; title: string; description: string };
       }) => {
-        const tokenid = item.data.token;
         const Adverobject = {
+          id: item.data.token,
           title: item.data.title,
-          descript: item.data.description,
+          description: item.data.description,
         };
-        this.postService.update(tokenid, Adverobject);
+
         Adverlist.push(Adverobject);
       },
     );
-    // console.log('Count Advertice :', Adverlist.length);
-    // console.log(Adverlist);
+    for (let i = 0; i < Adverlist.length; i++) {
+      await this.postService.create(Adverlist[i]);
+    }
   }
 }
