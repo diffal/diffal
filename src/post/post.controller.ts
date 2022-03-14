@@ -38,6 +38,11 @@ export class PostController {
     return this.postService.findOne(id);
   }
 
+  @Get('/search/q?')
+  async search(@Query('text') text: string) {
+    return this.postService.search(text);
+  }
+
   @Post('/')
   insert(@Body() body: CreatePostDto) {
     return this.postService.create(body);
