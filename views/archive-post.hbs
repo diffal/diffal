@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{title}}</title>
+</head>
+
+<body>
+    {{>header}}
+<main>
+    <h1>{{title}}</h1>
+    <div class="post-list">
+        <div class="post-list-grid">
+        {{#each posts}}
+            <div class="post-card-item">
+                <h2>{{this.title}}</h2> 
+                <h3>{{this.description}}</h3> 
+            </div>
+        {{/each}}
+        </div>
+    </div>
+</main>
+
+    {{>footer active}}
+</body>
+</html>

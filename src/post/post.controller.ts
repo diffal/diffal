@@ -8,8 +8,10 @@ import {
   Delete,
   Query,
   Put,
+  Res,
 } from '@nestjs/common';
 import { PostService } from './post.service';
+import { Response } from 'express';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { PaginationDto } from './dto/pagination.dto';
@@ -18,8 +20,13 @@ export class PostController {
   constructor(private readonly postService: PostService) {}
 
   @Get()
-  findAll() {
-    return this.postService.findAll();
+  async findAll(@Res() res?: Response) {
+    const result = await this.postService.findAll();
+    const post = res.render('archive-post', {
+      posts: result,
+      title: 'آگهی ها-سایت دیفال',
+    });
+    return { result, post };
   }
 
   @Get('/paginate')
@@ -33,8 +40,13 @@ export class PostController {
   }
 
   @Get('/search/q?')
-  async search(@Query('text') text: string) {
-    return this.postService.search(text);
+  async search(@Query('text') text: string, @Res() res?: Response) {
+    const result = await this.postService.search(text);
+    const search = res.render('search', {
+      posts: result,
+      title: ` نتایج جستجو برای '${text}'`,
+    });
+    return { result, search };
   }
 
   @Post('/')
