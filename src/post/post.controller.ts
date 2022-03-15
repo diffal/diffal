@@ -22,10 +22,11 @@ export class PostController {
   @Get()
   async findAll(@Res() res?: Response) {
     const result = await this.postService.findAll();
-    return res.render('archive-post', {
+    const post = res.render('archive-post', {
       posts: result,
       title: 'آگهی ها-سایت دیفال',
     });
+    return { result, post };
   }
 
   @Get('/paginate')
@@ -41,10 +42,11 @@ export class PostController {
   @Get('/search/q?')
   async search(@Query('text') text: string, @Res() res?: Response) {
     const result = await this.postService.search(text);
-    return res.render('search', {
+    const search = res.render('search', {
       posts: result,
       title: ` نتایج جستجو برای '${text}'`,
     });
+    return { result, search };
   }
 
   @Post('/')
